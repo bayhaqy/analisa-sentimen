@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block title %}{% endblock %} - Aplikasi Analisa Sentimen</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="static/css/all.css">
+		
+		<!-- Bootstrap core CSS -->
+		<link href="static/css/bootstrap.min.css" rel="stylesheet">
+		{% block head %}{% endblock %}
+	</head>
+	<body>
+	<style type="text/css">
+		body{
+		font:15px/1.5 Arial, Halvetica, sans-serif;
+		}
+
+		@media (min-width:768px) { 
+		/* centered navigation */
+		 .nav.navbar-nav {
+			 float: left;
+		 }
+		 .nav.navbar-nav {
+			 clear: left;
+			 float: left;
+			 margin: 0;
+			 padding: 0;
+			 position: relative;
+			 left: 50%;
+			 text-align: center;
+		 }
+		 .nav.navbar-nav > li {
+			 position: relative;
+			 right: 50%;
+		 }
+		 .nav.navbar-nav li {
+			text-align: left
+		 }
+		}
+		{% block css %}{% endblock %}
+	</style>
+	<div class="container">
+		<div style="background:tomato !important; color:whitesmoke;" class='jumbotron text-center' >
+			<h1>Aplikasi Analisa Sentimen</h1>
+			<h3>Menggunakan VADER dan Support Vector Machine dengan SMOTE</h3>
+			</br>
+			<nav class="navbar navbar-nav navbar-light bg-light">
+				<div class='text-center'>
+					<a class="navbar-brand navbar-text" href="/">Home</a>
+					<a class="navbar-brand navbar-text" href="/dataset">Dataset</a>
+				</div>
+			</nav>
+		</div>
+	</div>{% block content %}{% endblock %}
+	{% block footer %}<p class='text-center'>&copy; Copyright 2019 by <a href="https://id.linkedin.com/in/achmad-bayhaqy" rel="noopener noreferrer" target="_blank">Achmad Bayhaqy</a></p>{% endblock %}
+
+	<script src="static/js/jquery.min.js"></script>
+	<script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+	{% block scripts %}{% endblock %}
+	</body>
+</html>

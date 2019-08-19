@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block css %}
+		.spinner-1::before{
+			content: "";
+			box-sizing: border-box;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			height: 60px;
+			width: 60px;
+			margin-top: -30px;
+			margin-left: -30px;
+			border-radius: 50%;
+			border: 6px solid transparent;
+			border-top-color:red;
+			animation: spinner 1s linear infinite;
+		}
+		@keyframes spinner {
+			to {
+				transform: rotate(360deg);
+			}
+		}
+		li { background-color:red; }
+		li:nth-child(odd) {background-color: red; 
+		}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="POST" action="{{ url_for('analisa')}}" id="myForm">
+        <div class="card">
+            <div class="card-body text-center">
+                    <label>Silahkan masukkan Teks dibawah ini:</label>
+                    <textarea id="TweetName" class="form-control text-center" rows="3" cols="2" name="rawtext" placeholder="..Silahkan ketikkan teks.."></textarea>
+                    <br/>
+                    <div>
+                        <input type="submit" onclick="myAnalyser()" value="Analisa" class="btn btn-primary ">
+                        <a href="{{ url_for ('index')}}" type="button" class="btn btn-danger" > Reset</a>
+                        <input type="button" onclick="myFunction()" value="Hapus" class="btn btn-outline-dark">
+                    </div>
+                <label style="color: red;font-family: sans-serif;size: 20px">{{ result_text }}</label>
+            </div>
+        </div>
+    </form>
+</div>
+<hr/>
+<div class="main">
+        <div class="container">
+            <div class="card">
+                <div class="card-body text-center">
+                    <!-- <p class="card-title"><div class="alert alert-primary" role="alert"></p> -->
+                    <p>Teks yang dimasukkan:</p>
+                    <p style="color:red;font-family: sans-serif;">{{ received_text }}</p>
+                    <hr/>
+                    <p>Translate Text ke Bahasa Inggris:</p>
+                    <p style="color:red;font-family: sans-serif;">{{ trans_text }}</p>
+                    <hr/>
+                    <p>Teks setelah dilakukan cleansing:</p>
+                    <p style="color:red;font-family: sans-serif;">{{ clean_text }}</p>
+                    <hr/>
+                    <p>Teks setelah dilakukan preprocessing:</p>
+                    <p style="color:red;font-family: sans-serif;">{{ prep_text }}</p>
+                    <hr/>
+                    <p>Bobot kata:</p>
+                    <p style="color:red;font-family: sans-serif;">{{ bobot_kata }}</p>
+                    <hr/>
+                    <p>Waktu yang dibutuhkan: <span style="color:red;">{{ final_time }}</span> untuk analisa sentimen</p>
+                </div>
+            <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Kategori :</th>
+                            <th scope="col">VADER</th>
+                            <th scope="col">SVM+SMOTE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Hasil :</th>
+                            <th scope="row">{{result_vader}}</th>
+                            <th scope="row">{{result_svm}}</th>
+                        </tr>
+                    </tbody>
+            </table>    
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}{{ super() }}
+<script>
+    function myFunction() {
+        document.getElementById('myForm').reset();
+    }
+</script>
+<script>
+function myAnalyser() {
+    document.querySelector('.main div').style.display = 'none';
+    document.querySelector('.main').classList.add('spinner-1');
+    setTimeout(() => {
+        document.querySelector('.main').classList.remove('spinner-1');
+        document.querySelector('.main div').style.display = 'block';
+    }, 5000);
+}
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#myForm").submit(function(){
+	  var isValid = true;
+  
+	  if($("#TweetName").val().trim().length == 0) {
+		  isValid = false;
+		alert("Kolom Text tidak boleh kosong");
+  
+	  }
+	  return isValid;
+  });
+});
+</script>
+{% endblock %}

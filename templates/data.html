@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Dataset{% endblock %}
+{% block head %}
+	<!-- MDBootstrap Datatables  -->
+	<link href="static/css/addons/datatables.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="static/css/jquery.dataTables.css">
+	
+	<!-- DataTables CSS -->
+	<link href="static/css/addons/datatables.min.css" rel="stylesheet">
+	
+	<!-- DataTables Select CSS -->
+	<link href="static/css/addons/datatables-select.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+{% endblock %}
+
+{% block css %}
+div.dataTables_length {
+    display: none;
+}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-body text-center">
+            <div>
+            <h3>Komposisi Data:</h3>
+            <p style="color:red;font-family: sans-serif;">{{ positive }}</p>
+            <p style="color:red;font-family: sans-serif;">{{ negative }}</p>
+            <p style="color:red;font-family: sans-serif;">{{ totaldata }}</p>
+			<hr/>
+                <h3>Dataset tentang Islamophobia beserta Prediksi:</h3>
+					{{dataset.to_html(classes="table table-striped table-bordered table-sm table-hover table-responsive") | safe}}
+				<hr/>
+				<h3>Bobot data tentang Islamophobia:</h3>
+					<p class="display">	{{bobotdata.to_html(classes="display pageResize table-hover") | safe}}
+            </div>
+            <hr/>
+            <h3>Positive Wordcloud:</h3>
+            <img class="img-fluid" src="static/images/positive.png">
+			<hr/>
+            <h3>Negative Wordcloud:</h3>
+            <img class="img-fluid" src="static/images/negative.png">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}{{ super() }}
+	<!-- MDBootstrap Datatables  -->
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('table').DataTable({			
+			"pageLength": 20,
+			"scrollY": 200,
+			});});
+	</script>
+
+	<!-- DataTables JS -->
+	<script href="static/js/addons/datatables.min.js" rel="stylesheet"></script>
+
+	<!-- DataTables Select JS -->
+	<script href="static/js/addons/datatables-select.min.js" rel="stylesheet"></script>
+	
+	<script type="text/javascript" src="static/js/jquery.dataTables.js"></script>
+	
+	<script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.19/features/pageResize/dataTables.pageResize.min.js"></script>
+{% endblock %}
