@@ -203,8 +203,8 @@ file_name = ('static/data/Dataset.csv')
 df= pd.read_csv(file_name)
 
 # Mengambil data tweet
-print("Mengambil data tweet")
-X = df.iloc[:, 0].values
+#print("Mengambil data tweet")
+#X = df.iloc[:, 0].values
 
 # Encode Data Label dan mengambilnya
 print("Encode Data Label")
