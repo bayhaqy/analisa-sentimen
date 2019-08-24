@@ -29,7 +29,6 @@ from sklearn.svm import LinearSVC
 import pickle
 
 
-
 # Define fungsi untuk clean tweet
 def clean_tweet(tweet):
 	# Case folding
@@ -96,9 +95,9 @@ def preprocessing_en_stem(tweet):
 	return sentence
 
 
-# Read Dataset
+# Read Dataset yang sudah diberikan label
 print("Read Dataset")
-file_name = ('Dataset_islamophobia.csv')
+file_name = ('Dataset.csv')
 df= pd.read_csv(file_name)
 
 # Encode Data Label
@@ -108,7 +107,7 @@ y = le.transform(df['Sentiment'])
 
 # Melakukan proses TF-IDF
 print("TF-IDF")
-tfidfconverter = TfidfVectorizer(min_df=2, max_df=1.0, ngram_range=(1,3), stop_words=word_tokenize('english'), tokenizer= preprocessing_en_stem)
+tfidfconverter = TfidfVectorizer(min_df=2, max_df=0.7, ngram_range=(1,3), stop_words=word_tokenize('english'), tokenizer= preprocessing_en_stem)
 X_vect = tfidfconverter.fit_transform(df['Tweet']).toarray()
 print(X_vect.shape)
 

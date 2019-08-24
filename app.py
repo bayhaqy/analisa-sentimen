@@ -95,7 +95,7 @@ def clean_tweet(tweet):
 		if w not in wrem_list:
 			for x in w:
 				if x in exclude or x.isdigit():
-					x=" "
+					x=""
 					rem_list.append(x)
 				else:
 					rem_list.append(x)
@@ -232,27 +232,30 @@ print("Get feature name")
 df_tfidf = pd.DataFrame(X_vect,columns=tfidfconverter.get_feature_names())
 df_tfidf['Sentiment']= y
 
-print("Count all feature")
-allwords = df_tfidf.drop(['Sentiment'], axis=1).sum(axis=0).sort_values(ascending=False)
-allwords = pd.DataFrame({'Count': allwords}).reset_index()
 
 # Load index page
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
 # Load dataset page
 @app.route('/dataset')
 def dataset():	
 	# Cek jumlah positive, negative dan neutral
-    positives = df[df['VADER'] == 'Positive']
-    negatives = df[df['VADER'] == 'Negative']
-    positive = ('Total Label Positive VADER   : {}'.format(len(positives)))
-    negative = ('Total Label Negative VADER   : {}'.format(len(negatives)))
-    totaldata = ('Total Data                  : {}'.format(df.shape[0]))
+	positives = df[df['VADER'] == 'Positive']
+	negatives = df[df['VADER'] == 'Negative']
+	positive = ('Total Label Positive VADER   : {}'.format(len(positives)))
+	negative = ('Total Label Negative VADER   : {}'.format(len(negatives)))
+	totaldata = ('Total Data                  : {}'.format(df.shape[0]))
+	
+	print("Count all feature")
+	allwords = df_tfidf.drop(['Sentiment'], axis=1).sum(axis=0).sort_values(ascending=False)
+	allwords = pd.DataFrame({'Count': allwords}).reset_index()
 
-    return render_template('data.html', dataset = df, positive = positive, negative = negative, totaldata = totaldata, bobotdata = allwords)
+	dataset = df.to_html(table_id="Table1", classes="display table-bordered table-hover")
+	bobotdata = allwords.to_html(table_id="Table2", classes="display table-bordered table-hover")
+	
+	return render_template('data.html', dataset = dataset, positive = positive, negative = negative, totaldata = totaldata, bobotdata = bobotdata)
 
 
 # Load generate wordcloud

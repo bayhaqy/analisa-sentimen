@@ -30,13 +30,13 @@
     <form method="POST" action="{{ url_for('analisa')}}" id="myForm">
         <div class="card">
             <div class="card-body text-center">
-                    <label>Silahkan masukkan Teks dibawah ini:</label>
-                    <textarea id="TweetName" class="form-control text-center" rows="3" cols="2" name="rawtext" placeholder="..Silahkan ketikkan teks.."></textarea>
+                    <label>Please input your text in the below :</label>
+                    <textarea id="TweetName" class="form-control text-center" rows="3" cols="2" name="rawtext" placeholder="..Input your text.."></textarea>
                     <br/>
                     <div>
-                        <input type="submit" onclick="myAnalyser()" value="Analisa" class="btn btn-primary ">
+                        <input type="submit" onclick="myAnalyser()" value="Analysis" class="btn btn-primary ">
                         <a href="{{ url_for ('index')}}" type="button" class="btn btn-danger" > Reset</a>
-                        <input type="button" onclick="myFunction()" value="Hapus" class="btn btn-outline-dark">
+                        <input type="button" onclick="myFunction()" value="Delete" class="btn btn-outline-dark">
                     </div>
                 <label style="color: red;font-family: sans-serif;size: 20px">{{ result_text }}</label>
             </div>
@@ -49,34 +49,34 @@
             <div class="card">
                 <div class="card-body text-center">
                     <!-- <p class="card-title"><div class="alert alert-primary" role="alert"></p> -->
-                    <p>Teks yang dimasukkan:</p>
+                    <p>Text Entered :</p>
                     <p style="color:red;font-family: sans-serif;">{{ received_text }}</p>
                     <hr/>
-                    <p>Translate Text ke Bahasa Inggris:</p>
+                    <p>Translate Text to English :</p>
                     <p style="color:red;font-family: sans-serif;">{{ trans_text }}</p>
                     <hr/>
-                    <p>Teks setelah dilakukan cleansing:</p>
+                    <p>Text after Cleansing :</p>
                     <p style="color:red;font-family: sans-serif;">{{ clean_text }}</p>
                     <hr/>
-                    <p>Teks setelah dilakukan preprocessing:</p>
+                    <p>Text after Preprocessing :</p>
                     <p style="color:red;font-family: sans-serif;">{{ prep_text }}</p>
                     <hr/>
-                    <p>Bobot kata:</p>
+                    <p>Word Weight :</p>
                     <p style="color:red;font-family: sans-serif;">{{ bobot_kata }}</p>
                     <hr/>
-                    <p>Waktu yang dibutuhkan: <span style="color:red;">{{ final_time }}</span> untuk analisa sentimen</p>
+                    <p>Spend of Time : <span style="color:red;">{{ final_time }}</span> for Sentiment Analysis</p>
                 </div>
             <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Kategori :</th>
+                            <th scope="col">Category :</th>
                             <th scope="col">VADER</th>
-                            <th scope="col">SVM+SMOTE</th>
+                            <th scope="col">SVM with SMOTE</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row">Hasil :</th>
+                            <th scope="row">Result :</th>
                             <th scope="row">{{result_vader}}</th>
                             <th scope="row">{{result_svm}}</th>
                         </tr>
@@ -112,7 +112,7 @@ $(document).ready(function(){
   
 	  if($("#TweetName").val().trim().length == 0) {
 		  isValid = false;
-		alert("Kolom Text tidak boleh kosong");
+		alert("Text column can't be empty");
   
 	  }
 	  return isValid;

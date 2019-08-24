@@ -16,9 +16,6 @@
 {% endblock %}
 
 {% block css %}
-div.dataTables_length {
-    display: none;
-}
 {% endblock %}
 
 {% block content %}
@@ -26,16 +23,16 @@ div.dataTables_length {
     <div class="card">
         <div class="card-body text-center">
             <div>
-            <h3>Komposisi Data:</h3>
+            <h3>Data composition:</h3>
             <p style="color:red;font-family: sans-serif;">{{ positive }}</p>
             <p style="color:red;font-family: sans-serif;">{{ negative }}</p>
             <p style="color:red;font-family: sans-serif;">{{ totaldata }}</p>
 			<hr/>
-                <h3>Dataset tentang Islamophobia beserta Prediksi:</h3>
-					{{dataset.to_html(classes="table table-striped table-bordered table-sm table-hover table-responsive") | safe}}
+                <h3>Dataset Prediction based on the Islamophobia:</h3>
+					{{dataset | safe}}
 				<hr/>
-				<h3>Bobot data tentang Islamophobia:</h3>
-					<p class="display">	{{bobotdata.to_html(classes="display pageResize table-hover") | safe}}
+				<h3>Data weight about Islamophobia:</h3>
+					{{bobotdata | safe}}
             </div>
             <hr/>
             <h3>Positive Wordcloud:</h3>
@@ -52,10 +49,21 @@ div.dataTables_length {
 	<!-- MDBootstrap Datatables  -->
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$('table').DataTable({			
-			"pageLength": 20,
+		$('#Table1').DataTable({			
+			"pageLength": 10,
+			"scrollX": true,
 			"scrollY": 200,
-			});});
+			});
+		$('#Table2').DataTable({			
+			"pageLength": 10,
+			"scrollX": true,
+			"scrollY": 200,
+			"columns": [
+			{ "width": "10%" },
+			{ "width": "100%" },
+			{ "width": "10%" }]
+			});
+			});
 	</script>
 
 	<!-- DataTables JS -->
