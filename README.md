@@ -17,3 +17,7 @@ If you want to create from your own dataset, you can build it with step in the b
 8. Export model with best performance result to directory static/data as model.pkl
 9. Copy dataset with label from VADER to directory static/data as Dataset.csv
 10. Open application and make sure it's run..
+
+
+See the paper on:
+http://dx.doi.org/10.12928/telkomnika.v18i4.14179
