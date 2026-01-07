@@ -5,7 +5,7 @@ Click==7.0
 cycler==0.10.0
 Flask==1.1.1
 googletrans==2.4.0
-gunicorn==19.9.0
+gunicorn==22.0.0
 idna==2.8
 imbalanced-learn==0.5.0
 imblearn==0.0
